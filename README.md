@@ -90,19 +90,19 @@ public void Move() {
 # Screenshots
 
 - **Екран за избор на режим**  
-  ![mode](https://github.com/anastefanovska/Snake/assets/168287719/1c5e7937-d190-47d7-9ee0-03234a37c226)
+  ![mode](https://github.com/marijagashoska/Snake-Game/blob/main/mode.png)
 
 - **Почетен екран**  
   Се прикажува порака "PRESS ANY KEY TO START".  
-  ![start](https://github.com/anastefanovska/Snake/assets/168287719/e84040a3-e09f-4be4-ae51-41d898ba0ed9)
+  ![start](https://github.com/marijagashoska/Snake-Game/blob/main/start.png)
 
 - **Играње на играта**  
   Змијата се движи на таблата.  
-  ![game](https://github.com/anastefanovska/Snake/assets/168287719/8361fd4a-08e6-4fac-bfa1-6cbe4c9a34e3)
+  ![game](https://github.com/marijagashoska/Snake-Game/blob/main/game.png)
 
 - **Екран за крај на игра**  
   Прикажува моментален и најдобар до сега резултат.  
-  ![end](https://github.com/anastefanovska/Snake/assets/168287719/8fed828f-f3aa-4f23-a13b-a4e745a789b9)
+  ![end](https://github.com/marijagashoska/Snake-Game/blob/main/end.png)
 
 
 
