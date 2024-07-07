@@ -1,6 +1,6 @@
 ﻿namespace Snake
 {
-    partial class SnakeForm
+    partial class GameOverForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SnakeForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameOverForm));
             this.SuspendLayout();
             // 
-            // Snake
+            // GameOverForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Snake";
-            this.Text = "Snake";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Snake_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Snake_KeyDown);
+            this.Name = "GameOverForm";
+            this.Text = "Game Over";
             this.ResumeLayout(false);
 
         }
@@ -48,4 +46,3 @@
         #endregion
     }
 }
-
