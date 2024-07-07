@@ -25,6 +25,9 @@ namespace Snake
             this.BackColor = Color.LightGreen;
             this.DoubleBuffered = true;
             this.StartPosition = FormStartPosition.CenterScreen;
+
+            ShowModeSelectionForm();
+
             InitializeGame();
         }
 
@@ -39,7 +42,12 @@ namespace Snake
 
         private void Snake_Paint(object sender, PaintEventArgs e)
         {
-           
+            if (!gameStarted)
+            {
+                DrawStartMessage(e.Graphics);
+            }
+            else
+            {
                 DrawGrid(e.Graphics);
                 DrawSnake(e.Graphics);
                 DrawFood(e.Graphics);
@@ -52,8 +60,9 @@ namespace Snake
                     {
                         highScore = state.Score;
                     }
-                   
-               }
+                    ShowGameOverForm();
+                }
+            }
         }
 
         private void Snake_KeyDown(object sender, KeyEventArgs e)
@@ -101,11 +110,19 @@ namespace Snake
             }
 
             state.Move();
-          
+            AdjustGameSpeed();
             Invalidate();
         }
 
-      
+        private void AdjustGameSpeed()
+        {
+            int newInterval = 100 - (state.Score * 2); // Decrease interval by 2ms per score
+            if (newInterval < 20) // Set a minimum interval to avoid being too fast
+            {
+                newInterval = 20;
+            }
+            gameTimer.Interval = newInterval;
+        }
 
         private void DrawGrid(Graphics g)
         {
@@ -160,7 +177,70 @@ namespace Snake
                 g.DrawString("High Score: " + highScore, scoreFont, scoreBrush, PADDING + 200, PADDING - 30);
             }
         }
-       
-       
+
+        private void DrawStartMessage(Graphics g)
+        {
+            using (Brush textBrush = new SolidBrush(Color.White))
+            using (Font textFont = new Font("Arial", 16))
+            {
+                string message = "PRESS ANY KEY TO START";
+                SizeF textSize = g.MeasureString(message, textFont);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(128, 0, 0, 0)), 0, 0, ClientSize.Width, ClientSize.Height);
+                g.DrawString(message, textFont, textBrush, (ClientSize.Width - textSize.Width) / 2, (ClientSize.Height - textSize.Height) / 2);
+            }
+        }
+
+        private void ShowGameOverForm()
+        {
+            using (var gameOverForm = new GameOverForm(state.Score, highScore))
+            {
+                var result = gameOverForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    RestartGame();
+                }
+                else if (result == DialogResult.Retry)
+                {
+                    using (var modeSelectionForm = new ModeSelectionForm())
+                    {
+                        if (modeSelectionForm.ShowDialog() == DialogResult.OK)
+                        {
+                            selectedMode = modeSelectionForm.SelectedMode;
+                            RestartGame();
+                        }
+                        else
+                        {
+                            this.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+        }
+
+        private void ShowModeSelectionForm()
+        {
+            using (var modeSelectionForm = new ModeSelectionForm())
+            {
+                if (modeSelectionForm.ShowDialog() == DialogResult.OK)
+                {
+                    selectedMode = modeSelectionForm.SelectedMode;
+                    RestartGame();
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+        }
+
+        private void RestartGame()
+        {
+            InitializeGame();
+            Invalidate();
+        }
     }
 }
